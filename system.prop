@@ -59,5 +59,8 @@ ro.sys.sdcardfs=true
 # Time
 persist.timed.enable=true
 
+# Timeout failed shutdowns
+ro.build.shutdown_timeout=5
+
 # WiFi
 wifi.interface=wlan0
