@@ -31,6 +31,7 @@ persist.gps.qc_nlp_in_use=0
 media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true
 mm.enable.smoothstreaming=true
+persist.bluetooth.disableabsvol=true
 
 # NFC
 ro.nfc.port=I2C
