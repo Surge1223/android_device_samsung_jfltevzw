@@ -1,4 +1,5 @@
-# Copyright (C) 2011 The Android Open Source Project
+#
+# Copyright (C) 2011 The CyanogenMod Project
 # Copyright (C) 2016 The JDCTeam
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,18 +13,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
- 
 #
-# This file is the build configuration for a full Android
-# build for maguro hardware. This cleanly combines a set of
-# device-specific aspects (drivers) with a device-agnostic
-# product configuration (apps). Except for a few implementation
-# details, it only fundamentally contains two inherit-product
-# lines, full and maguro, hence its name.
-#
+# Inherit from those products. Most specific first.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit from jflte device
-$(call inherit-product, device/samsung/jflte/full_jflte.mk)
+# Inherit device parts.
+$(call inherit-product, device/samsung/jfltevzw/device.mk)
 
-# Inherit our stuff.
-$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
+## Also get non-open-source specific aspects if available
+$(call inherit-product-if-exists, vendor/samsung/jf-common/jf-common-vendor.mk)

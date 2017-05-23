@@ -30,7 +30,7 @@
 # Assert
 TARGET_OTA_ASSERT_DEVICE := jflte,jfltexx,i9505,GT-I9505,jgedlte,i9505g,GT-I9505G,jfltevzw,jfltespr,jflterefreshspr,jfltetmo,jfltecri,jfltecsp,jflteatt,jfltecan,jfltetfnatt,jfltetfntmo,jflteusc,jfltezm
 
-COMMON_PATH := device/samsung/jflte
+COMMON_PATH := device/samsung/jfltevzw
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8960
@@ -55,7 +55,7 @@ TARGET_KERNEL_HAVE_EXFAT := true
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 BOARD_HAVE_SAMSUNG_CSDCLIENT := true
-USE_CUSTOM_AUDIO_POLICY := 1
+USE_CUSTOM_AUDIO_POLICY := 0
 
 # Block-Based OTA
 BLOCK_BASED_OTA := false
