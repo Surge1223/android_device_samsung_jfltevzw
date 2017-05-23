@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-$(LOCAL_PATH) := device/samsung/jflte
+$(LOCAL_PATH) := device/samsung/jfltevzw
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
@@ -23,7 +23,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product-if-exists, vendor/samsung/jf-common/jf-common-vendor.mk)
 
 # Overlay
-DEVICE_PACKAGE_OVERLAYS += device/samsung/jflte/overlay
+DEVICE_PACKAGE_OVERLAYS += device/samsung/jfltevzw/overlay
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -140,8 +140,8 @@ PRODUCT_PACKAGES += \
     lights.MSM8960
 
 # LEDify
-PRODUCT_COPY_FILES += \
-    vendor/aosp/prebuilt/common/bin/ledify:system/bin/ledify
+#PRODUCT_COPY_FILES += \
+#    vendor/aosp/prebuilt/common/bin/ledify:system/bin/ledify
 
 # Loki
 PRODUCT_PACKAGES += \
