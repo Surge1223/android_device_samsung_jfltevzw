@@ -1,6 +1,7 @@
 #
 # Copyright (C) 2014 The CyanogenMod Project
 # Copyright (C) 2016 The JDCTeam
+# Copyright (C) 2017 Everyone
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +17,8 @@
 #
 
 $(LOCAL_PATH) := device/samsung/jfltevzw
+
+$(call inherit-product-if-exists, vendor/samsung/jfltevzw/jfltevzw-vendor.mk)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
@@ -68,6 +71,19 @@ $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk
 
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
+# loki
+PRODUCT_PACKAGES += \
+    loki_tool \
+    loki.sh \
+    loki_bootloaders \
+    recovery-transform.sh
+
+PRODUCT_COPY_FILES += \
+    device/samsung/jfltevzw/releasetools/loki.sh:install/bin/loki.sh
+
+## device overlays
+DEVICE_PACKAGE_OVERLAYS += device/samsung/jfltevzw/overlay
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
@@ -75,7 +91,8 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.usb.default \
     libaudio-resampler \
-    libqcomvoiceprocessing
+    libqcomvoiceprocessing \
+    tinymix
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
@@ -90,12 +107,8 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    camera.msm8960 \
-    SnapdragonCamera
-
-# Custom JDCTeam packages
-PRODUCT_PACKAGES += \
-    Toolbox
+    Snap \
+    camera.msm8960
 
 # Display
 PRODUCT_PACKAGES += \
@@ -103,9 +116,7 @@ PRODUCT_PACKAGES += \
     gralloc.msm8960 \
     hwcomposer.msm8960 \
     libgenlock \
-    memtrack.msm8960 \
-    libqdutils \
-    libqdMetaData
+    memtrack.msm8960
 
 # Doze
 PRODUCT_PACKAGES += \
@@ -139,28 +150,18 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     lights.MSM8960
 
-# LEDify
-#PRODUCT_COPY_FILES += \
-#    vendor/aosp/prebuilt/common/bin/ledify:system/bin/ledify
-
-# Loki
-PRODUCT_PACKAGES += \
-    loki_tool \
-    loki.sh \
-    loki_bootloaders \
-    recovery-transform.sh
-
 # Media
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml 
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
 
 # Media Profile
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
     $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
+
 
 # NFC packages
 PRODUCT_PACKAGES += \
@@ -177,22 +178,19 @@ PRODUCT_COPY_FILES += \
 
 # OMX
 PRODUCT_PACKAGES += \
-    libc2dcolorconvert \
-    libmm-omxcore \
+    libOmxCore \
+    libOmxVdec \
+    libOmxVenc \
     libOmxAacEnc \
     libOmxAmrEnc \
-    libOmxCore \
     libOmxEvrcEnc \
-    libOmxVenc \
-    libOmxVdec \
     libOmxQcelp13Enc \
     libstagefrighthw
 
-# OTA Updates
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.ota.romname=AOSP-JF-7.0 \
-    ro.ota.version=$(shell date -u +%Y%m%d) \
-    ro.ota.manifest=https://romhut.com/roms/aosp-jf-7-0/ota.xml
+# Power
+PRODUCT_PACKAGES += \
+    power.msm8960
+
 
 # Qualcomm
 PRODUCT_PACKAGES += \
@@ -215,10 +213,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/selective-spn-conf.xml:system/etc/selective-spn-conf.xml
 
-# Thermal
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine.conf \
-    $(LOCAL_PATH)/configs/thermal-engine-8064ab.conf:system/etc/thermal-engine-8064ab.conf
 
 # Stlport
 PRODUCT_PACKAGES += \
@@ -226,11 +220,11 @@ PRODUCT_PACKAGES += \
 
 # Device specific applications
 PRODUCT_PACKAGES += \
-    SamsungServiceMode \
-    STweaks
+    SamsungServiceMode
 
 # Thermal
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine.conf \
     $(LOCAL_PATH)/configs/thermal-engine-8064ab.conf:system/etc/thermal-engine-8064ab.conf
 
 # Wifi

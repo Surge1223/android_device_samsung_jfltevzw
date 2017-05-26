@@ -21,17 +21,16 @@
 # definition file).
 #
 
-# inherit from qcom-common
--include device/samsung/qcom-common/BoardConfigCommon.mk
+# inherit from us
+-include device/samsung/jf-common/BoardConfig.mk
 
 # inherit from the proprietary version
--include vendor/samsung/jf-common/BoardConfigVendor.mk
+-include vendor/samsung/jfltevzw/BoardConfigVendor.mk
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := jflte,jfltexx,i9505,GT-I9505,jgedlte,i9505g,GT-I9505G,jfltevzw,jfltespr,jflterefreshspr,jfltetmo,jfltecri,jfltecsp,jflteatt,jfltecan,jfltetfnatt,jfltetfntmo,jflteusc,jfltezm
 
 COMMON_PATH := device/samsung/jfltevzw
-
 # Platform
 TARGET_BOARD_PLATFORM := msm8960
 
@@ -53,12 +52,10 @@ TARGET_KERNEL_SOURCE := kernel/samsung/jf
 TARGET_KERNEL_HAVE_EXFAT := true
 
 # Audio
-BOARD_USES_ALSA_AUDIO := true
 BOARD_HAVE_SAMSUNG_CSDCLIENT := true
-USE_CUSTOM_AUDIO_POLICY := 0
+BOARD_USES_ALSA_AUDIO := true
 
-# Block-Based OTA
-BLOCK_BASED_OTA := false
+USE_CUSTOM_AUDIO_POLICY := 1
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(COMMON_PATH)/bluetooth
@@ -76,6 +73,7 @@ BOARD_BATTERY_DEVICE_NAME := "battery"
 BOARD_CHARGING_CMDLINE_NAME := "androidboot.bootchg"
 BOARD_CHARGING_CMDLINE_VALUE := "true"
 BOARD_CHARGER_ENABLE_SUSPEND := true
+
 
 # Display
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
@@ -104,15 +102,15 @@ TARGET_USES_MEDIA_EXTENSIONS := true
 BOARD_NFC_HAL_SUFFIX := msm8960
 
 # Partitions
-TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 10485760
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := f2fs
+BOARD_CACHEIMAGE_PARTITION_SIZE := 2170552320
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 10485760
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2894069760
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 9961455616
-BOARD_CACHEIMAGE_PARTITION_SIZE := 2147483648
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1181114368
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 28651290624
 BOARD_FLASH_BLOCK_SIZE := 131072
+
+
 
 # Power
 TARGET_POWERHAL_VARIANT := qcom
@@ -124,13 +122,16 @@ TARGET_SYSTEM_PROP := $(COMMON_PATH)/system.prop
 BOARD_USES_QC_TIME_SERVICES := true
 
 # Recovery
-TARGET_RECOVERY_DENSITY := hdpi
+TARGET_RECOVERY_DENSITY := xhdpi
 TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab.qcom
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
 
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := $(COMMON_PATH)/releasetools
 # RIL
 BOARD_RIL_CLASS := ../../../$(COMMON_PATH)/ril
+USE_DEVICE_SPECIFIC_DATASERVICES := true
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
