@@ -32,14 +32,28 @@ TARGET_OTA_ASSERT_DEVICE := jflte,jfltexx,i9505,GT-I9505,jgedlte,i9505g,GT-I9505
 
 COMMON_PATH := device/samsung/jfltevzw
 # Platform
+
 TARGET_BOARD_PLATFORM := msm8960
-
-# Architecture
 TARGET_CPU_VARIANT := krait
-
-# Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 TARGET_BOARD_INFO_FILE := $(COMMON_PATH)/board-info.txt
+
+BOARD_VENDOR := samsung
+
+# Bootloader
+TARGET_NO_BOOTLOADER := true
+
+# Architecture
+TARGET_ARCH := arm
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_ARCH_VARIANT := armv7-a-neon
+
+# Graphics
+TARGET_USES_C2D_COMPOSITION := true
+TARGET_USES_ION := true
+# Qualcomm support
+BOARD_USES_QCOM_HARDWARE := true
 
 # Kernel
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 zcache msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.selinux=permissive
