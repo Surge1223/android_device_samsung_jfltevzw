@@ -1,6 +1,4 @@
-#
-# Copyright (C) 2011 The CyanogenMod Project
-# Copyright (C) 2016 The JDCTeam
+# Copyright (C) 2015 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,12 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit device parts.
-$(call inherit-product, device/samsung/jfltevzw/device.mk)
+LOCAL_PATH := $(call my-dir)
 
-## Also get non-open-source specific aspects if available
-$(call inherit-product-if-exists, vendor/samsung/jfltevzw/jfltevzw-vendor.mk)
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := \
+    samsung_ril.cpp
+
+LOCAL_SHARED_LIBRARIES := libbinder
+
+LOCAL_MODULE := libshim_ril
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+
+include $(BUILD_SHARED_LIBRARY)

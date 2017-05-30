@@ -22,9 +22,6 @@ $(call inherit-product-if-exists, vendor/samsung/jfltevzw/jfltevzw-vendor.mk)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-# Get non-open-source specific aspects if available
-$(call inherit-product-if-exists, vendor/samsung/jf-common/jf-common-vendor.mk)
-
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += device/samsung/jfltevzw/overlay
 
@@ -81,8 +78,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     device/samsung/jfltevzw/releasetools/loki.sh:install/bin/loki.sh
 
-## device overlays
-DEVICE_PACKAGE_OVERLAYS += device/samsung/jfltevzw/overlay
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -116,7 +111,9 @@ PRODUCT_PACKAGES += \
     gralloc.msm8960 \
     hwcomposer.msm8960 \
     libgenlock \
-    memtrack.msm8960
+    memtrack.msm8960 \
+    libqdutils \
+    libqdMetaData
 
 # Doze
 PRODUCT_PACKAGES += \
@@ -178,6 +175,8 @@ PRODUCT_COPY_FILES += \
 
 # OMX
 PRODUCT_PACKAGES += \
+    libc2dcolorconvert \
+    libmm-omxcore \
     libOmxCore \
     libOmxVdec \
     libOmxVenc \
@@ -207,6 +206,7 @@ PRODUCT_PACKAGES += \
 
 # RIL
 PRODUCT_PACKAGES += \
+    libshim_ril \
     libril_jflte
 
 # SPN override
@@ -241,3 +241,4 @@ PRODUCT_COPY_FILES += \
 
 # Common Qualcomm
 $(call inherit-product, device/samsung/qcom-common/qcom-common.mk)
+

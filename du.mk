@@ -4,7 +4,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit some common du stuff.
 $(call inherit-product, vendor/du/config/common_full_phone.mk)
 # Inherit from jfltevzw device
-#$(call inherit-product, device/samsung/jfltevzw/device.mk)
+$(call inherit-product, device/samsung/jfltevzw/device.mk)
 
 TARGET_SCREEN_WIDTH := 720
 TARGET_SCREEN_HEIGHT := 1280
@@ -28,4 +28,4 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
   PRIVATE_BUILD_DESC="jfltevzw-user 5.0.1 LRX22C I545VRSGPL1 release-keys"
 
 
-$(call inherit-product-if-exists, vendor/samsung/jf-common/jf-common-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/jfltevzw/jfltevzw-vendor.mk)
